@@ -1,11 +1,14 @@
 "use strict";
 const util = require("util"); //for debugging
 const esClient = require("../helpers/es");
-const esQueryMaker = require("../helpers/esQueryMaker");
 const _ = require("lodash");
 const queryDSL = require("bodybuilder");
+const ElasticSearch = require("elasticsearch");
 
 module.exports = options => {
+  const esClient = new ElasticSearch.Client({
+    host: options.SM_ELASTIC_HOST || "localhost:9200"
+  });
   return {
     logMessageRequest: function(query, requestHost) {
       console.log("query + " + util.inspect(query, false, null));
@@ -15,7 +18,7 @@ module.exports = options => {
       });
       return esClient
         .index({
-          index: process.env.SM_CONTACT_US_ELASTIC_INDEX + "_" + requestHost,
+          index: options.SM_CONTACT_US_ELASTIC_INDEX + "_" + requestHost,
           type: "document",
           body: esBody
         })

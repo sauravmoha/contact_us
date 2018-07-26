@@ -4,7 +4,7 @@ const Joi = require("joi");
 const _ = require("lodash");
 const url = require("url");
 
-module.exports = (options, server) => {
+module.exports = options => {
   const contactUsApi = require("./api")(options);
 
   return [
