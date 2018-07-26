@@ -6,7 +6,6 @@ const url = require("url");
 
 module.exports = options => {
   const contactUsApi = require("./api")(options);
-
   return [
     {
       method: "POST",
