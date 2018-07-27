@@ -6,7 +6,7 @@ const ElasticSearch = require("elasticsearch");
 
 module.exports = options => {
   const esClient = new ElasticSearch.Client({
-    host: options.SM_ELASTIC_HOST || "localhost:9200"
+    host: options.elastic_host || "localhost:9200"
   });
 
   return {
@@ -18,7 +18,7 @@ module.exports = options => {
       });
       return esClient
         .index({
-          index: options.SM_CONTACT_US_ELASTIC_INDEX + "_" + requestHost,
+          index: options.elastic_index + "_" + requestHost,
           type: "document",
           body: esBody
         })
