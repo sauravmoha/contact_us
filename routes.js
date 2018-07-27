@@ -5,12 +5,12 @@ const _ = require("lodash");
 const url = require("url");
 
 module.exports = options => {
-  const contactUsApi = require("./api")(options);
+  const FormApi = require("./api")(options);
   return [
     {
       method: "POST",
-      path: "/contact_us",
-      handler: contactUsApi.logMessage,
+      path: options.path,
+      handler: FormApi.logMessage,
       options: {
         description: "Return data according to query params",
         tags: ["api"],
